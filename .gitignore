@@ -1,0 +1,13 @@
+# .gitignore for smart-librarian-ai
+.env
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.env.*
+.envrc
+venv/
+.env.local
+chroma_db/
+*.db
+*.sqlite3
