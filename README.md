@@ -39,7 +39,7 @@ python -m venv venv
 ## Activate virtual environment
 ## Windows:
 venv\Scripts\activate
-# macOS/Linux:
+## macOS/Linux:
 source venv/bin/activate
 
 3. Install Dependencies
@@ -49,11 +49,11 @@ bashpip install -r requirements.txt
 bash# Copy the environment template
 cp .env.example .env
 
-# Edit .env file and add your OpenAI API key
-# Windows:
+## Edit .env file and add your OpenAI API key
+## Windows:
 
 notepad .env
-# macOS/Linux:
+## macOS/Linux:
 
 nano .env
 
@@ -68,3 +68,81 @@ CHROMA_DB_PATH=./chroma_db
 API_HOST=localhost
 
 API_PORT=8000
+
+## Running the Application
+Method 1: Full Application (Recommended) 
+
+Start both backend and frontend:
+
+bash# Terminal 1 - Start the backend API
+
+python -m backend.api
+
+## Terminal 2 - Start the frontend (keep backend running)
+
+streamlit run frontend/app.py
+
+Method 2: API Only
+
+For API-only usage:
+
+bashpython -m backend.api
+
+Access API documentation at: http://localhost:8000/docs
+
+## Usage 
+## Web Interface
+
+Open your browser to http://localhost:8501
+
+Ask for book recommendations using natural language:
+
+"I want a book about freedom and social control"
+
+"What do you recommend if I love fantasy stories?"
+
+"Books about friendship and magic"
+
+"What is 1984 about?"
+
+
+
+## API Endpoints
+
+GET / - Health check
+
+POST /chat - Get book recommendations
+
+GET /books - List all available books
+
+GET /search?query=<text> - Search books by query
+
+
+## Book Database
+
+The system includes 12 classic books:
+
+- 1984 (George Orwell)
+- The Hobbit (J.R.R. Tolkien)
+- To Kill a Mockingbird (Harper Lee)
+- The Lord of the Rings (J.R.R. Tolkien)
+- Pride and Prejudice (Jane Austen)
+- The Catcher in the Rye (J.D. Salinger)
+- Brave New World (Aldous Huxley)
+- The Great Gatsby (F. Scott Fitzgerald)
+- Harry Potter and the Philosopher's Stone (J.K. Rowling)
+- Dune (Frank Herbert)
+- All Quiet on the Western Front (Erich Maria Remarque)
+- The Chronicles of Narnia (C.S. Lewis)
+
+## How It Works
+
+User Query: User asks for book recommendations
+
+Semantic Search: Query is converted to embeddings and searched in ChromaDB
+
+AI Processing: GPT-4o-mini analyzes results and generates recommendations
+
+Tool Calling: AI automatically calls get_summary_by_title() for detailed information
+
+Response: User receives conversational recommendations with full summaries
